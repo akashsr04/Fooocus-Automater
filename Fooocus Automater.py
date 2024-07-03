@@ -51,6 +51,23 @@ for i in range(350,0,-1):                           #350 - Time taken for Fooocu
     print(f'{i} seconds left for Image Generation')
     time.sleep(1)
 print("Image Generation Completed (Most probably)")
+#Function to check if atleast 2 images have been created or not
+def File_Finder():
+    try:
+        files = os.listdir(dir_outputs)
+        selected_files = [file for file in files if ((file.endswith('.jpeg'))or(file.endswith('.png')))]
+        selected_files = sorted(selected_files,reverse=True)
+        return selected_files
+    except:
+        time.sleep(1)
+        print('Waiting')
+        File_Finder()
+
+while len(File_Finder())==0 or len(File_Finder())==1:
+    print('Image Creation is taking longer than usual.. Please Wait.')
+    File_Finder()
+print('Image Creation completed (Confirmed)')
+print(File_Finder())
 
 #AutoUploader - Upload the generated images to your instagram account automatically
 #----------------------------------------------------------------------------------
